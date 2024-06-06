@@ -1,156 +1,47 @@
-# Electricity prices analyses and forecasting
-Analyse energy prices in Spain based on consumption, weather and generation data and create a forecast of the electricity price
+# Use-case: Forecasts for the Spanish energy transition
 
-## Full presentation:
-[Results Presentation](Analyse_Energy_prices_Spain_results.pdf)
+## 1. Scenario:
+In the course of the energy transition, a Spanish TSO asks for your help. Volatile, decentralized generators, increasingly complex electricity markets and higher political requirements are putting the TSO under more and more pressure. In order to optimize expansion planning, the TSO initially tried out various forecasts itself.
 
-##### Timeseries forecasting and managementsummary
+The TSO is now asking you, as an independent body, to also prepare a forecast to verify your own or to generate better alternatives
 
-## 1. Workflow – CRISP-DM:
+## Get the detailed analysis of the data and forecasts here:
+[Full presentation](Analyse_Energy_prices_Spain_results.pdf)
 
-- Forecasts for the Spanish energy transition
-    - **Data Preparationand Feature Engineering:**
-       - Checking and removingduplicates
-       - Checking and removingoutliers
-       - Check formissing values
-       - Fill in missing valueswith last know data(interpolation)
-       - Cretedatasetper cityfrom weather
-       - Restrictdatasetto highlycorrelatedfeatures(basedon target)
-       - Create simple time features, e.g. dayoftheweek, month, etc.
+## 2. Influencing factors on the electricity prices
 
-###### CRISP-DM:
+### Analyse Trends and Seasonality
 
-```
-[1] -https://datasolut.com/crisp-dm-standard/
-```
-```
-CRISP-DM:
-```
+#### Heatmap: Daily vs. Monthly electricity prices
 
-## 2. Factors influencing the electricity price
+<img title="Daily vs. Monthly Electricity prices" alt="Daily vs. Monthly Electricity prices" src="heatmap_tag_monat.png">
 
-- Trends andSeasonality
-    Electricity price (€/MWh)
-    across weekdays & months
+#### Heatmap: Hourly vs. Daily electricity prices
 
-```
-Electricity price (€/MWh)
-across weekdays & hours
-```
-```
-Trends & Seasonalityofelectricityprices
-⚫ Seasonality : Montly, dailyand hourly
-⚫ Monthly :
-⚫ Electricity prices tend to be lower in winter
-⚫ Highest electricity prices in late summer (September maximum)
-⚫ Possible reason: high demand (ac) and lower production (water)
-⚫ Does not correlate 1:1 with electricity demand (highest in winter and
-summer)
-⚫ Daily :
-⚫ Working days higher than weekends (possible reason: industry)
-⚫ Hourly :
-⚫ Cheapest at night, most expensive in the evening (5-9 pm)
-⚫ Striking: 13-16 h the electricity price is lower (possibly siesta time in Spain)
-```
+<img title="Figure: Hourly vs. Daily electricity prices" alt="Figure: Hourly vs. Daily electricity prices" src="heatmap_stunde_tag.png">
 
-## 2. Factors influencing the electricity price
+### Correlation analysis
 
-- Resultsofcorrelationanalysis
+#### Figure: Show correlations between most important features 
 
-```
-Figure: Highest linear correlation to the target variable electricity price
-```
-```
-⚫ Positivelycorrelated::
-⚫ Day-Ahead-Preis (0.67)
-⚫ Generation bynaturalgas(0.48)
-⚫ Erzeugung durch Kohle (0.46)
-⚫ Negativelycorrelated:
-⚫ Generation byhydropump (-0.48)
-⚫ Generation wind power (-0.33)
-⚫ Wind speedMadrid (-0.33)
-⚫ Strong correlation of temperature data between the cities
-```
-
-## 2. Factors influencing the electricity price
-
-- Resultsofcorrelationanalysis
-
-```
-Analysis of the high electricity prices in September compared to the year as a whole revealed
-⚫ Higher influencing factor due to consumption (possibly air conditioning systems with high consumption)
-⚫ Higher influencing factor Hydropower reservoir (water shortage due to drought → Generation more expensive
-```
-```
-Rank September
-Merkmal
-```
-```
-September
-Korrelation
-```
-```
-Gesamtjahr
-Merkmal
-```
-```
-Gesamtjahr
-Korrelation
-```
-1. Electricityprice 1.0 Electricityprice 1.
-2. Gaserzeugung 0.55 Day-Ahead-Price 0.
-3. Generation by
-    waterreservoir
-
-```
-0.52 Generation bygas 0.
-```
-4. Electricitydemand **0.51** Generation bycoal 0.
-5. Day-Ahead-Price 0.48 Temp_max_Sevilla 0.
+<img title="Show correlations between most important features" alt="Show correlations between most important features" src="corr.png">
 
 
-### 3. Time seriesforecast
+
+## 3. Time series forecast
 
 - Comparison of different ML models with cross-validation and AutoML (criteria: **MAPE** )
 - ChooseEBM (ML-Model) –Explainable BoostingMachine (Regressor)
 
-```
-<img title="Comparison forecast vs. ground truth next 24 hours" alt="Alt text" src="forecast_w.png">
 
-```
-Abs / Preis
-```
-```
-23:00:00 67 65 2 2 / 67 =
-0,
-00:00:00 58 60 2 2 / 58 =
-0,
-```
-```
-MAPE = (0,029 +0,035) /
-= 0,032 → 3,2 %
-```
-```
-[2] -https://interpret.ml/docs/ebm.html
-```
-```
-Mean absolute percentage error
-```
+### Comparison forecast vs. ground truth next 24 hours
+<img title="Comparison forecast vs. ground truth next 24 hours" alt="Comparison forecast vs. ground truth next 24 hours" src="forecast_d.png">
 
-### 4. Evaluation & Explainability
-
-- Evaluation with TSO:
-- Interpret Model:
-    - **Global** : [http://127.0.0.1:7777/140231638982464/](http://127.0.0.1:7777/140231638982464/)
-    - **Lokal** : [http://127.0.0.1:7777/140231638978864/](http://127.0.0.1:7777/140231638978864/)
+### Comparison forecast vs. ground truth vs. TSO forecast next 24 hours
+<img title="Comparison forecast vs. ground truth vs. TSO forecast next 24 hours" alt="Comparison forecast vs. ground truth vs. TSO forecast next 24 hours" src="forecast_final.png">
 
 
-## 4. Global Explainability
-
-- Feature Importancefrom theEBM model
-
-
-## 5. Conclusion and outlook
+## 4. Conclusion and outlook
 
 - **Conclusion** :
     - Influencing factors identified and explained (see chapter 2)
@@ -162,37 +53,5 @@ Mean absolute percentage error
        them
     - Data set sufficiently large for an approach with artificial neural networks
        - But training computationally and time consuming
-
-
-## 6. Additional Slides
-
-
-#### Additional slide: Explainable Boosting Machines
-
-- Explainable Boosting Machine (EBM) is a tree-based, cyclic gradient boosting Generalized Additive Model with automatic
-    interaction detection. EBMs are often as accurate as state-of-the-art blackbox models while remaining completely interpretable.
-    Although EBMs are often slower to train than other modern algorithms, EBMs are extremely compact and fast at prediction
-    time.
-- Explainable Boosting Machine (interpret.ml)
-- Exploringexplainableboostingmachines
-
-
-## Additional slide: Explain calculation MAPE
-
-**Time Price Price_Predictio
-n**
-
-```
-Abs(price–pred) (M)APE
-```
-###### 23:00:00 67 65 2 2 / 67 = 0,
-
-###### 00:00:00 58 60 2 2 / 58 = 0,
-
-###### (0,029 + 0,035)
-
-###### /
-
-###### = 0,032 → 3,2 %
 
 
