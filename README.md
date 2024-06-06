@@ -115,13 +115,8 @@ Korrelation
 - ChooseEBM (ML-Model) –Explainable BoostingMachine (Regressor)
 
 ```
-Time Prei
-s
-```
-```
-Preis Prognose Abs(Preis –
-Prog.)
-```
+<img title="Comparison forecast vs. ground truth next 24 hours" alt="Alt text" src="forecast_w.png">
+
 ```
 Abs / Preis
 ```
