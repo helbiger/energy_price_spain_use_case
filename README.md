@@ -1,8 +1,11 @@
 # Electricity prices analyses and forecasting
 Analyse energy prices in Spain based on consumption, weather and generation data and create a forecast of the electricity price
 
-##### Timeseries forecasting and managementsummary
+## Full presentation:
+[Results Presentation](Analyse_Energy_prices_Spain_results.pdf)
 
+##### Timeseries forecasting and managementsummary
+https://github.com/helbiger/energy_price_spain_use_case/blob/main/Analyse_Energy_prices_Spain_results.pdf
 
 ## 1. Workflow – CRISP-DM:
 
